@@ -69,6 +69,7 @@ class RenderZefyrParagraph extends RenderParagraph
 
   LineNode get node => _node;
   LineNode _node;
+
   void set node(LineNode value) {
     _node = value;
   }
@@ -181,7 +182,7 @@ class RenderZefyrParagraph extends RenderParagraph
   //
 
   @override
-  void set text(TextSpan value) {
+  void set text(InlineSpan value) {
     _prototypePainter.text = new TextSpan(text: '.', style: value.style);
     _selectionRects = null;
     super.text = value;
@@ -211,6 +212,7 @@ class RenderZefyrParagraph extends RenderParagraph
   }
 
   TextSelection _lastPaintedSelection;
+
   @override
   void paintSelection(PaintingContext context, Offset offset,
       TextSelection selection, Color selectionColor) {

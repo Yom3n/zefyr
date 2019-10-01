@@ -99,7 +99,9 @@ class _ZefyrEditableTextState extends State<ZefyrEditableText>
 
   @override
   Widget build(BuildContext context) {
-    FocusScope.of(context).reparentIfNeeded(focusNode);
+    //FocusScope.of(context).reparentIfNeeded(focusNode);
+    FocusAttachment _nodeAttachment = FocusScope.of(context).attach(context);
+    _nodeAttachment.reparent(parent: focusNode);
     super.build(context); // See AutomaticKeepAliveState.
 
     Widget body = ListBody(children: _buildChildren(context));
