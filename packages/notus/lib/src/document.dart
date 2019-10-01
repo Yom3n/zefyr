@@ -3,6 +3,7 @@
 // BSD-style license that can be found in the LICENSE file.
 import 'dart:async';
 
+import 'package:notus/convert.dart';
 import 'package:quill_delta/quill_delta.dart';
 
 import 'document/attributes.dart';
@@ -44,6 +45,12 @@ class NotusDocument {
     _loadDocument(_delta);
   }
 
+  NotusDocument.fromHtml(String html)
+      : _heuristics = NotusHeuristics.fallback,
+        _delta = NotusHTMLCodec().decode(html) {
+    _loadDocument(_delta);
+  }
+
   NotusDocument.fromJson(List data)
       : _heuristics = NotusHeuristics.fallback,
         _delta = Delta.fromJson(data) {
@@ -81,6 +88,10 @@ class NotusDocument {
 
   dynamic toJson() {
     return _delta.toJson();
+  }
+
+  String toHtml() {
+    return NotusHTMLCodec().encode(_delta);
   }
 
   /// Returns `true` if this document and associated stream of [changes]
