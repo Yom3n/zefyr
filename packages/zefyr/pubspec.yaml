@@ -15,7 +15,10 @@ dependencies:
   image_picker: ^0.6.1
   quill_delta: ^1.0.0-dev.1.0
   notus:
-    path: ../notus
+    git:
+      url: https://github.com/Yom3n/zefyr
+      path: packages/notus
+      ref: html-prod
   meta: ^1.1.0
 
 dev_dependencies:
