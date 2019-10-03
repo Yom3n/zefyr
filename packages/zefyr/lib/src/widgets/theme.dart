@@ -66,14 +66,14 @@ class ZefyrThemeData {
   final double indentSize;
   final ZefyrToolbarTheme toolbarTheme;
 
-  factory ZefyrThemeData.fallback(BuildContext context) {
+  factory ZefyrThemeData.fallback(BuildContext context, {Color fontColor}) {
     final ThemeData themeData = Theme.of(context);
     final defaultStyle = DefaultTextStyle.of(context);
     final paragraphStyle = defaultStyle.style.copyWith(
       fontSize: 16.0,
       height: 1.25,
       fontWeight: FontWeight.normal,
-      color: Colors.grey.shade800,
+      color: fontColor ?? Colors.grey.shade800,
     );
     final padding = const EdgeInsets.only(bottom: 16.0);
     final boldStyle = TextStyle(fontWeight: FontWeight.bold);
@@ -82,11 +82,13 @@ class ZefyrThemeData {
         TextStyle(color: Colors.blue, decoration: TextDecoration.underline);
 
     return ZefyrThemeData(
+      fontColor: fontColor ?? Colors.grey.shade800,
       boldStyle: boldStyle,
       italicStyle: italicStyle,
       linkStyle: linkStyle,
       paragraphTheme: StyleTheme(textStyle: paragraphStyle, padding: padding),
-      headingTheme: HeadingTheme.fallback(),
+      headingTheme:
+          HeadingTheme.fallback(fontColor: fontColor ?? Colors.grey.shade800),
       blockTheme: BlockTheme.fallback(themeData),
       selectionColor: Colors.lightBlueAccent.shade100,
       cursorColor: Colors.black,
@@ -106,7 +108,7 @@ class ZefyrThemeData {
     this.cursorColor,
     this.indentSize,
     this.toolbarTheme,
-    @required this.fontColor,
+    this.fontColor,
   });
 
   ZefyrThemeData copyWith({
@@ -150,6 +152,7 @@ class ZefyrThemeData {
       cursorColor: other.cursorColor,
       indentSize: other.indentSize,
       toolbarTheme: other.toolbarTheme,
+      fontColor: other.fontColor,
     );
   }
 }
@@ -172,12 +175,12 @@ class HeadingTheme {
   });
 
   /// Creates fallback theme for headings.
-  factory HeadingTheme.fallback() {
+  factory HeadingTheme.fallback({Color fontColor}) {
     return HeadingTheme(
       level1: StyleTheme(
         textStyle: TextStyle(
           fontSize: 30.0,
-          color: Colors.grey.shade800,
+          color: fontColor ?? Colors.grey.shade800,
           height: 1.25,
           fontWeight: FontWeight.w600,
         ),
@@ -186,7 +189,7 @@ class HeadingTheme {
       level2: StyleTheme(
         textStyle: TextStyle(
           fontSize: 24.0,
-          color: Colors.grey.shade800,
+          color: fontColor ?? Colors.grey.shade800,
           height: 1.25,
           fontWeight: FontWeight.w600,
         ),
@@ -195,7 +198,7 @@ class HeadingTheme {
       level3: StyleTheme(
         textStyle: TextStyle(
           fontSize: 20.0,
-          color: Colors.grey.shade800,
+          color: fontColor ?? Colors.grey.shade800,
           height: 1.25,
           fontWeight: FontWeight.w600,
         ),

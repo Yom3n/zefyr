@@ -91,6 +91,7 @@ class _FullPageEditorScreenState extends State<FullPageEditorScreen> {
         child: ZefyrTheme(
           data: theme,
           child: ZefyrEditor(
+            fontColor: Colors.red,
             controller: _controller,
             focusNode: _focusNode,
             mode: _editing ? ZefyrMode.edit : ZefyrMode.select,

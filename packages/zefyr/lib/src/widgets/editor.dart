@@ -27,6 +27,7 @@ class ZefyrEditor extends StatefulWidget {
     this.imageDelegate,
     this.selectionControls,
     this.physics,
+    this.fontColor,
   })  : assert(mode != null),
         assert(controller != null),
         assert(focusNode != null),
@@ -68,6 +69,9 @@ class ZefyrEditor extends StatefulWidget {
 
   /// Padding around editable area.
   final EdgeInsets padding;
+
+  /// Color of all texts expect links
+  final Color fontColor;
 
   @override
   _ZefyrEditorState createState() => _ZefyrEditorState();
@@ -140,7 +144,10 @@ class _ZefyrEditorState extends State<ZefyrEditor> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     final parentTheme = ZefyrTheme.of(context, nullOk: true);
-    final fallbackTheme = ZefyrThemeData.fallback(context);
+    final fallbackTheme = ZefyrThemeData.fallback(
+      context,
+      fontColor: widget.fontColor,
+    );
     _themeData = (parentTheme != null)
         ? fallbackTheme.merge(parentTheme)
         : fallbackTheme;
