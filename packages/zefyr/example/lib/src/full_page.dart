@@ -65,6 +65,7 @@ class _FullPageEditorScreenState extends State<FullPageEditorScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = ZefyrThemeData(
+      fontColor: Colors.red,
       cursorColor: Colors.blue,
       toolbarTheme: ZefyrToolbarTheme.fallback(context).copyWith(
         color: Colors.grey.shade800,

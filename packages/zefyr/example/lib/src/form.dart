@@ -46,6 +46,7 @@ class _FormEmbeddedScreenState extends State<FormEmbeddedScreen> {
 
   Widget buildEditor() {
     final theme = ZefyrThemeData(
+      fontColor: Colors.black87,
       toolbarTheme: ZefyrToolbarTheme.fallback(context).copyWith(
         color: Colors.grey.shade800,
         toggleColor: Colors.grey.shade900,
