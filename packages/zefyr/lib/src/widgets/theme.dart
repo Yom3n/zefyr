@@ -60,7 +60,6 @@ class ZefyrThemeData {
   final BlockTheme blockTheme;
   final Color selectionColor;
   final Color cursorColor;
-  final Color fontColor;
 
   /// Size of indentation for blocks.
   final double indentSize;
@@ -82,7 +81,6 @@ class ZefyrThemeData {
         TextStyle(color: Colors.blue, decoration: TextDecoration.underline);
 
     return ZefyrThemeData(
-      fontColor: fontColor ?? Colors.grey.shade800,
       boldStyle: boldStyle,
       italicStyle: italicStyle,
       linkStyle: linkStyle,
@@ -108,7 +106,6 @@ class ZefyrThemeData {
     this.cursorColor,
     this.indentSize,
     this.toolbarTheme,
-    this.fontColor,
   });
 
   ZefyrThemeData copyWith({
@@ -136,7 +133,6 @@ class ZefyrThemeData {
       cursorColor: cursorColor ?? this.cursorColor,
       indentSize: indentSize ?? this.indentSize,
       toolbarTheme: toolbarTheme ?? this.toolbarTheme,
-      fontColor: fontColor ?? this.fontColor,
     );
   }
 
@@ -152,7 +148,6 @@ class ZefyrThemeData {
       cursorColor: other.cursorColor,
       indentSize: other.indentSize,
       toolbarTheme: other.toolbarTheme,
-      fontColor: other.fontColor,
     );
   }
 }

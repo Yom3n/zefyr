@@ -33,7 +33,6 @@ class _ViewScreen extends State<ViewScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = ZefyrThemeData(
-      fontColor: Colors.green,
       toolbarTheme: ZefyrToolbarTheme.fallback(context).copyWith(
         color: Colors.grey.shade800,
         toggleColor: Colors.grey.shade900,
