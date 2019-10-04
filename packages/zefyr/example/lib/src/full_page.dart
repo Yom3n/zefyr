@@ -48,9 +48,12 @@ class _FullPageEditorScreenState extends State<FullPageEditorScreen> {
   bool _editing = false;
   StreamSubscription<NotusChange> _sub;
 
+  Color fontColor;
+
   @override
   void initState() {
     super.initState();
+    fontColor = Colors.green;
     _sub = _controller.document.changes.listen((change) {
       print('${change.source}: ${change.change}');
     });
@@ -65,7 +68,6 @@ class _FullPageEditorScreenState extends State<FullPageEditorScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = ZefyrThemeData(
-      fontColor: Colors.red,
       cursorColor: Colors.blue,
       toolbarTheme: ZefyrToolbarTheme.fallback(context).copyWith(
         color: Colors.grey.shade800,
@@ -76,8 +78,8 @@ class _FullPageEditorScreenState extends State<FullPageEditorScreen> {
     );
 
     final done = _editing
-        ? [FlatButton(onPressed: _stopEditing, child: Text('DONE'))]
-        : [FlatButton(onPressed: _startEditing, child: Text('EDIT'))];
+        ? FlatButton(onPressed: _stopEditing, child: Text('DONE'))
+        : FlatButton(onPressed: _startEditing, child: Text('EDIT'));
     return Scaffold(
       resizeToAvoidBottomPadding: true,
       appBar: AppBar(
@@ -85,7 +87,23 @@ class _FullPageEditorScreenState extends State<FullPageEditorScreen> {
         backgroundColor: Colors.grey.shade200,
         brightness: Brightness.light,
         title: ZefyrLogo(),
-        actions: done,
+        actions: [
+          IconButton(
+            onPressed: () {
+              setState(() {
+                if (fontColor == Colors.green) {
+                  fontColor = Colors.red;
+                } else {
+                  fontColor = Colors.green;
+                }
+              });
+            },
+            icon: Icon(
+              Icons.format_color_text,
+            ),
+          ),
+          done
+        ],
       ),
       body: ZefyrScaffold(
         child: ZefyrTheme(

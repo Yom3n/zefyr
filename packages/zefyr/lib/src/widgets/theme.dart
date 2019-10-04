@@ -60,7 +60,6 @@ class ZefyrThemeData {
   final BlockTheme blockTheme;
   final Color selectionColor;
   final Color cursorColor;
-  final Color fontColor;
 
   /// Size of indentation for blocks.
   final double indentSize;
@@ -86,7 +85,8 @@ class ZefyrThemeData {
       italicStyle: italicStyle,
       linkStyle: linkStyle,
       paragraphTheme: StyleTheme(textStyle: paragraphStyle, padding: padding),
-      headingTheme: HeadingTheme.fallback(),
+      headingTheme:
+          HeadingTheme.fallback(),
       blockTheme: BlockTheme.fallback(themeData),
       selectionColor: Colors.lightBlueAccent.shade100,
       cursorColor: Colors.black,
@@ -106,7 +106,6 @@ class ZefyrThemeData {
     this.cursorColor,
     this.indentSize,
     this.toolbarTheme,
-    @required this.fontColor,
   });
 
   ZefyrThemeData copyWith({
@@ -134,7 +133,6 @@ class ZefyrThemeData {
       cursorColor: cursorColor ?? this.cursorColor,
       indentSize: indentSize ?? this.indentSize,
       toolbarTheme: toolbarTheme ?? this.toolbarTheme,
-      fontColor: fontColor ?? this.fontColor,
     );
   }
 
