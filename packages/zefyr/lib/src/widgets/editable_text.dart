@@ -212,6 +212,7 @@ class _ZefyrEditableTextState extends State<ZefyrEditableText>
   // Private members
   //
 
+  // ignore: unused_field
   final ScrollController _scrollController = ScrollController();
   ZefyrRenderContext _renderContext;
   CursorTimer _cursorTimer;
