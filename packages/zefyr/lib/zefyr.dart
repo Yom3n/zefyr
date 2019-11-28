@@ -29,3 +29,4 @@ export 'src/widgets/selection.dart' hide SelectionHandleDriver;
 export 'src/widgets/theme.dart';
 export 'src/widgets/toolbar.dart';
 export 'src/widgets/view.dart';
+export 'src/widgets/attr_delegate.dart';
