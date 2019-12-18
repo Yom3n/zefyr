@@ -5,7 +5,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:notus/notus.dart';
-import 'package:zefyr/src/widgets/attr_delegate.dart';
 
 import 'editable_box.dart';
 import 'horizontal_rule.dart';

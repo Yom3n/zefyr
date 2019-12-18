@@ -14,10 +14,7 @@ dependencies:
   url_launcher: ^5.0.0
   quill_delta: ^1.0.0-dev.1.0
   notus:
-    git:
-      url: https://github.com/Yom3n/zefyr
-      path: packages/notus
-      ref: html_prod_3
+    path: ../notus
   meta: ^1.1.0
   quiver_hashcode: ^2.0.0
 
