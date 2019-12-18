@@ -19,9 +19,14 @@ import 'theme.dart';
 class ZefyrView extends StatefulWidget {
   final NotusDocument document;
   final ZefyrImageDelegate imageDelegate;
+  final Color fontColor;
 
-  const ZefyrView({Key key, @required this.document, this.imageDelegate})
-      : super(key: key);
+  const ZefyrView({
+    Key key,
+    @required this.document,
+    this.imageDelegate,
+    this.fontColor,
+  }) : super(key: key);
 
   @override
   ZefyrViewState createState() => ZefyrViewState();
@@ -49,7 +54,9 @@ class ZefyrViewState extends State<ZefyrView> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     final parentTheme = ZefyrTheme.of(context, nullOk: true);
-    final fallbackTheme = ZefyrThemeData.fallback(context);
+    final fallbackTheme = ZefyrThemeData.fallback(
+      context,
+    );
     _themeData = (parentTheme != null)
         ? fallbackTheme.merge(parentTheme)
         : fallbackTheme;

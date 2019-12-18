@@ -140,7 +140,9 @@ class _ZefyrEditorState extends State<ZefyrEditor> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     final parentTheme = ZefyrTheme.of(context, nullOk: true);
-    final fallbackTheme = ZefyrThemeData.fallback(context);
+    final fallbackTheme = ZefyrThemeData.fallback(
+      context,
+    );
     _themeData = (parentTheme != null)
         ? fallbackTheme.merge(parentTheme)
         : fallbackTheme;

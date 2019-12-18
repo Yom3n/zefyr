@@ -42,7 +42,7 @@ class ZefyrTheme extends InheritedWidget {
   /// and [nullOk] is set to `true`. If [nullOk] is set to `false` (default)
   /// then this method asserts.
   static ZefyrThemeData of(BuildContext context, {bool nullOk = false}) {
-    final ZefyrTheme widget = context.inheritFromWidgetOfExactType(ZefyrTheme);
+    final ZefyrTheme widget = context.dependOnInheritedWidgetOfExactType();
     if (widget == null && nullOk) return null;
     assert(widget != null,
         '$ZefyrTheme.of() called with a context that does not contain a ZefyrEditor.');
@@ -85,7 +85,8 @@ class ZefyrThemeData {
       italicStyle: italicStyle,
       linkStyle: linkStyle,
       paragraphTheme: StyleTheme(textStyle: paragraphStyle, padding: padding),
-      headingTheme: HeadingTheme.fallback(),
+      headingTheme:
+          HeadingTheme.fallback(),
       blockTheme: BlockTheme.fallback(themeData),
       selectionColor: Colors.lightBlueAccent.shade100,
       cursorColor: Colors.black,

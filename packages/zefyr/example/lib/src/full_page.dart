@@ -75,8 +75,8 @@ class _FullPageEditorScreenState extends State<FullPageEditorScreen> {
     );
 
     final done = _editing
-        ? [FlatButton(onPressed: _stopEditing, child: Text('DONE'))]
-        : [FlatButton(onPressed: _startEditing, child: Text('EDIT'))];
+        ? FlatButton(onPressed: _stopEditing, child: Text('DONE'))
+        : FlatButton(onPressed: _startEditing, child: Text('EDIT'));
     return Scaffold(
       resizeToAvoidBottomPadding: true,
       appBar: AppBar(
@@ -84,7 +84,9 @@ class _FullPageEditorScreenState extends State<FullPageEditorScreen> {
         backgroundColor: Colors.grey.shade200,
         brightness: Brightness.light,
         title: ZefyrLogo(),
-        actions: done,
+        actions: [
+          done
+        ],
       ),
       body: ZefyrScaffold(
         child: ZefyrTheme(
