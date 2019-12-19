@@ -153,17 +153,6 @@ class _RawZefyrLineState extends State<RawZefyrLine> {
     if (style.contains(NotusAttribute.link)) {
       result = result.merge(theme.linkStyle);
     }
-    if (style.contains(NotusAttribute.highlight)) {
-      final hexStringToColor = (String hex) {
-        hex = hex.replaceFirst('#', '');
-        hex = hex.length == 6 ? 'ff' + hex : hex;
-        int val = int.parse(hex, radix: 16);
-        return Color(val);
-      };
-      final bgColor =
-          hexStringToColor(style.value<String>(NotusAttribute.highlight));
-      result = result.copyWith(backgroundColor: bgColor);
-    }
     return result;
   }
 
