@@ -171,11 +171,11 @@ class InputConnectionController implements TextInputClient {
 
   @override
   void connectionClosed() {
-    if (hasConnection) {
-      _textInputConnection.connectionClosedReceived();
-      _textInputConnection = null;
-      _lastKnownRemoteTextEditingValue = null;
-      _sentRemoteValues.clear();
-    }
+//    if (hasConnection) {
+//      _textInputConnection.connectionClosedReceived();
+//      _textInputConnection = null;
+//      _lastKnownRemoteTextEditingValue = null;
+//      _sentRemoteValues.clear();
+//    }
   }
 }
