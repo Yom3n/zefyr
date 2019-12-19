@@ -78,7 +78,6 @@ class NotusAttribute<T> implements NotusAttributeBuilder<T> {
     NotusAttribute.heading.key: NotusAttribute.heading,
     NotusAttribute.block.key: NotusAttribute.block,
     NotusAttribute.embed.key: NotusAttribute.embed,
-    NotusAttribute.highlight.key: NotusAttribute.highlight,
   };
 
   // Inline attributes

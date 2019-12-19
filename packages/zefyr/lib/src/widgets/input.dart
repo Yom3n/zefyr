@@ -171,6 +171,7 @@ class InputConnectionController implements TextInputClient {
 
   @override
   void connectionClosed() {
+    //Don't uncomment that. That breaks Zefyr!
 //    if (hasConnection) {
 //      _textInputConnection.connectionClosedReceived();
 //      _textInputConnection = null;
