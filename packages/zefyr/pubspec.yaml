@@ -17,7 +17,7 @@ dependencies:
     git:
       url: https://github.com/Yom3n/zefyr
       path: packages/notus
-      ref: html-prod
+      ref: html_prod2
   meta: ^1.1.0
   quiver_hashcode: ^2.0.0
 
