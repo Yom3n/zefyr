@@ -142,18 +142,19 @@ class _ZefyrEditableTextState extends State<ZefyrEditableText>
       body = Padding(padding: widget.padding, child: body);
     }
 
-    body = SingleChildScrollView(
-      physics: widget.physics,
-      controller: _scrollController,
-      child: body,
-    );
 
     final layers = <Widget>[body];
-    layers.add(ZefyrSelectionOverlay(
-      controls: widget.selectionControls ?? defaultSelectionControls(context),
-    ));
+    layers.add(Positioned.fill(
+        left: 0,
+        right: 0,
+        bottom: 0,
+        top: 0,
+        child: ZefyrSelectionOverlay(
+          controls:
+              widget.selectionControls ?? defaultSelectionControls(context),
+        )));
 
-    return Stack(fit: StackFit.expand, children: layers);
+    return Stack(fit: StackFit.passthrough, children: layers);
   }
 
   @override
@@ -212,6 +213,7 @@ class _ZefyrEditableTextState extends State<ZefyrEditableText>
   // Private members
   //
 
+  // ignore: unused_field
   final ScrollController _scrollController = ScrollController();
   ZefyrRenderContext _renderContext;
   CursorTimer _cursorTimer;
