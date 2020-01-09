@@ -308,7 +308,6 @@ class _LinkButtonState extends State<LinkButton> {
   final TextEditingController _inputController = TextEditingController();
   Key _inputKey;
   bool _formatError = false;
-  ZefyrScope _editor;
 
   bool get isEditing => _inputKey != null;
 

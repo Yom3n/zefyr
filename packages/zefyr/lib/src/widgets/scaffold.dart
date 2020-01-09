@@ -10,8 +10,8 @@ class ZefyrScaffold extends StatefulWidget {
 
   static ZefyrScaffoldState of(BuildContext context) {
     final _ZefyrScaffoldAccess widget =
-        context.inheritFromWidgetOfExactType(_ZefyrScaffoldAccess);
-    return widget?.scaffold;
+        context.dependOnInheritedWidgetOfExactType<_ZefyrScaffoldAccess>();
+    return widget.scaffold;
   }
 
   @override
