@@ -99,7 +99,7 @@ class _ZefyrEditorState extends State<ZefyrEditor> {
 
   void hideToolbar() {
     if (_toolbarKey == null) return;
-    _scaffold.hideToolbar();
+    _scaffold.hideToolbar(buildToolbar);
     _toolbarKey = null;
   }
 
