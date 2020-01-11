@@ -23,6 +23,13 @@ class ZefyrField extends StatefulWidget {
   final ZefyrSearchDelegate searchDelegate;
   final ScrollPhysics physics;
 
+  /// The appearance of the keyboard.
+  ///
+  /// This setting is only honored on iOS devices.
+  ///
+  /// If unset, defaults to the brightness of [ThemeData.primaryColorBrightness].
+  final Brightness keyboardAppearance;
+
   const ZefyrField({
     Key key,
     this.decoration,
@@ -35,6 +42,7 @@ class ZefyrField extends StatefulWidget {
     this.imageDelegate,
     this.searchDelegate,
     this.physics,
+    this.keyboardAppearance,
   }) : super(key: key);
 
   @override
@@ -54,6 +62,7 @@ class _ZefyrFieldState extends State<ZefyrField> {
       imageDelegate: widget.imageDelegate,
       searchDelegate: widget.searchDelegate,
       physics: widget.physics,
+      keyboardAppearance: widget.keyboardAppearance,
     );
 
     if (widget.height != null) {
