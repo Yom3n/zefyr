@@ -91,7 +91,7 @@ class ZefyrViewState extends State<ZefyrView> {
   Widget _defaultChildBuilder(BuildContext context, Node node) {
     if (node is LineNode) {
       if (node.hasEmbed) {
-        return RawZefyrLine(node: node);
+        return ZefyrLine(node: node);
       } else if (node.style.contains(NotusAttribute.heading)) {
         return ZefyrHeading(node: node);
       }
