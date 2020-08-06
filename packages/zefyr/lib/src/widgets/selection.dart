@@ -4,6 +4,7 @@
 import 'dart:math' as math;
 import 'dart:ui' as ui;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -31,13 +32,16 @@ class ZefyrSelectionOverlay extends StatefulWidget {
   final TextSelectionControls controls;
 
   @override
-  _ZefyrSelectionOverlayState createState() => _ZefyrSelectionOverlayState();
+  ZefyrSelectionOverlayState createState() => ZefyrSelectionOverlayState();
 }
 
-class _ZefyrSelectionOverlayState extends State<ZefyrSelectionOverlay>
+class ZefyrSelectionOverlayState extends State<ZefyrSelectionOverlay>
     implements TextSelectionDelegate {
   TextSelectionControls _controls;
   TextSelectionControls get controls => _controls;
+
+  final ClipboardStatusNotifier _clipboardStatus =
+  kIsWeb ? null : ClipboardStatusNotifier();
 
   /// Global position of last TapDown event.
   Offset _lastTapDownPosition;
@@ -72,7 +76,10 @@ class _ZefyrSelectionOverlayState extends State<ZefyrSelectionOverlay>
     _toolbar = OverlayEntry(
       builder: (context) => FadeTransition(
         opacity: toolbarOpacity,
-        child: _SelectionToolbar(selectionOverlay: this),
+        child: _SelectionToolbar(
+          selectionOverlay: this,
+          clipboardStatus: _clipboardStatus,
+        ),
       ),
     );
     _overlay.insert(_toolbar);
@@ -115,12 +122,16 @@ class _ZefyrSelectionOverlayState extends State<ZefyrSelectionOverlay>
   void initState() {
     super.initState();
     _controls = widget.controls;
+    _clipboardStatus?.addListener(_onChangedClipboardStatus);
   }
 
   @override
   void didUpdateWidget(ZefyrSelectionOverlay oldWidget) {
     super.didUpdateWidget(oldWidget);
     _controls = widget.controls;
+    if (pasteEnabled && _controls?.canPaste(this) == true) {
+      _clipboardStatus?.update();
+    }
   }
 
   @override
@@ -158,6 +169,8 @@ class _ZefyrSelectionOverlayState extends State<ZefyrSelectionOverlay>
     hideToolbar();
     _toolbarController.dispose();
     _toolbarController = null;
+    _clipboardStatus?.removeListener(_onChangedClipboardStatus);
+    _clipboardStatus?.dispose();
     super.dispose();
   }
 
@@ -189,6 +202,12 @@ class _ZefyrSelectionOverlayState extends State<ZefyrSelectionOverlay>
   //
   // Private members
   //
+
+  void _onChangedClipboardStatus() {
+    setState(() {
+      // Inform the widget that the value of clipboardStatus has changed.
+    });
+  }
 
   void _handleChange() {
     if (_selection != _scope.selection || _focusOwner != _scope.focusOwner) {
@@ -311,7 +330,7 @@ class SelectionHandleDriver extends StatefulWidget {
         super(key: key);
 
   final _SelectionHandlePosition position;
-  final _ZefyrSelectionOverlayState selectionOverlay;
+  final ZefyrSelectionOverlayState selectionOverlay;
 
   @override
   _SelectionHandleDriverState createState() => _SelectionHandleDriverState();
@@ -398,8 +417,8 @@ class _SelectionHandleDriverState extends State<SelectionHandleDriver>
             TextSelectionHandleType.right);
         break;
       case _SelectionHandlePosition.extent:
-        // [endpoints] will only contain 1 point for collapsed selections, in
-        // which case we shouldn't be building the [end] handle.
+      // [endpoints] will only contain 1 point for collapsed selections, in
+      // which case we shouldn't be building the [end] handle.
         assert(endpoints.length == 2);
         point = endpoints[1].point;
         type = _chooseType(endpoints[1], TextSelectionHandleType.right,
@@ -414,7 +433,7 @@ class _SelectionHandleDriverState extends State<SelectionHandleDriver>
     );
 
     final Offset handleAnchor =
-        widget.selectionOverlay.controls.getHandleAnchor(
+    widget.selectionOverlay.controls.getHandleAnchor(
       type,
       block.preferredLineHeight,
     );
@@ -477,10 +496,10 @@ class _SelectionHandleDriverState extends State<SelectionHandleDriver>
   //
 
   TextSelectionHandleType _chooseType(
-    TextSelectionPoint endpoint,
-    TextSelectionHandleType ltrType,
-    TextSelectionHandleType rtlType,
-  ) {
+      TextSelectionPoint endpoint,
+      TextSelectionHandleType ltrType,
+      TextSelectionHandleType rtlType,
+      ) {
     if (selection.isCollapsed) return TextSelectionHandleType.collapsed;
 
     assert(endpoint.direction != null);
@@ -536,9 +555,11 @@ class _SelectionToolbar extends StatefulWidget {
   const _SelectionToolbar({
     Key key,
     @required this.selectionOverlay,
+    @required this.clipboardStatus,
   }) : super(key: key);
 
-  final _ZefyrSelectionOverlayState selectionOverlay;
+  final ZefyrSelectionOverlayState selectionOverlay;
+  final ClipboardStatusNotifier clipboardStatus;
 
   @override
   _SelectionToolbarState createState() => _SelectionToolbarState();
@@ -592,12 +613,14 @@ class _SelectionToolbarState extends State<_SelectionToolbar> {
     );
 
     final toolbar = controls.buildToolbar(
-        context,
-        editingRegion,
-        block.preferredLineHeight,
-        midpoint,
-        endpoints,
-        widget.selectionOverlay);
+      context,
+      editingRegion,
+      block.preferredLineHeight,
+      midpoint,
+      endpoints,
+      widget.selectionOverlay,
+      widget.clipboardStatus,
+    );
     return CompositedTransformFollower(
       link: block.layerLink,
       showWhenUnlinked: false,
