@@ -33,7 +33,7 @@ class _ViewScreen extends State<ViewScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomPadding: true,
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(title: ZefyrLogo()),
       body: ListView(
         children: <Widget>[
