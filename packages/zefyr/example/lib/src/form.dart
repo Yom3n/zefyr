@@ -32,7 +32,7 @@ class _FormEmbeddedScreenState extends State<FormEmbeddedScreen> {
     );
 
     final result = Scaffold(
-      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomPadding: true,
       appBar: AppBar(
         title: ZefyrLogo(),
         actions: [

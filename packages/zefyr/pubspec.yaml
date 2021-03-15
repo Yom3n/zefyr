@@ -5,13 +5,13 @@ author: Anatoly Pulyaevskiy <anatoly.pulyaevskiy@gmail.com>
 homepage: https://github.com/memspace/zefyr
 
 environment:
-  sdk: '>=2.10.0 <3.0.0'
+  sdk: '>=2.2.2 <3.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
   collection: ^1.14.6
-  url_launcher: ^6.0.2
+  url_launcher: ^5.0.0
   quill_delta: ^1.0.0
   notus:
     git:
