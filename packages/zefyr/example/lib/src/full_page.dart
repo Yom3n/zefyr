@@ -71,7 +71,7 @@ class _FullPageEditorScreenState extends State<FullPageEditorScreen> {
         ? IconButton(onPressed: _stopEditing, icon: Icon(Icons.save))
         : IconButton(onPressed: _startEditing, icon: Icon(Icons.edit));
     final result = Scaffold(
-      resizeToAvoidBottomPadding: true,
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         title: ZefyrLogo(),
         actions: [
