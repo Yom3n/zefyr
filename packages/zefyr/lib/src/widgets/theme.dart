@@ -312,6 +312,8 @@ class AttributeTheme {
   /// Style theme used to render code blocks.
   final BlockTheme code;
 
+  final TextStyle mjAttribute;
+
   /// Creates a [AttributeTheme] given a set of exact values.
   AttributeTheme({
     this.bold,
@@ -324,6 +326,7 @@ class AttributeTheme {
     this.numberList,
     this.quote,
     this.code,
+    this.mjAttribute,
   });
 
   /// The default attribute theme.
@@ -345,66 +348,66 @@ class AttributeTheme {
     }
 
     return AttributeTheme(
-      bold: TextStyle(fontWeight: FontWeight.bold),
-      italic: TextStyle(fontStyle: FontStyle.italic),
-      link: TextStyle(
-        decoration: TextDecoration.underline,
-        color: theme.accentColor,
-      ),
-      heading1: LineTheme(
-        textStyle: defaultLineTheme.textStyle.copyWith(
-          fontSize: 34.0,
-          color: defaultLineTheme.textStyle.color.withOpacity(0.7),
-          height: 1.15,
-          fontWeight: FontWeight.w300,
+        bold: TextStyle(fontWeight: FontWeight.bold),
+        italic: TextStyle(fontStyle: FontStyle.italic),
+        link: TextStyle(
+          decoration: TextDecoration.underline,
+          color: theme.accentColor,
         ),
-        padding: EdgeInsets.only(top: 16.0),
-      ),
-      heading2: LineTheme(
-        textStyle: defaultLineTheme.textStyle.copyWith(
-          fontSize: 24.0,
-          color: defaultLineTheme.textStyle.color.withOpacity(0.7),
-          height: 1.15,
-          fontWeight: FontWeight.normal,
+        heading1: LineTheme(
+          textStyle: defaultLineTheme.textStyle.copyWith(
+            fontSize: 34.0,
+            color: defaultLineTheme.textStyle.color.withOpacity(0.7),
+            height: 1.15,
+            fontWeight: FontWeight.w300,
+          ),
+          padding: EdgeInsets.only(top: 16.0),
         ),
-        padding: EdgeInsets.only(top: 8.0),
-      ),
-      heading3: LineTheme(
-        textStyle: defaultLineTheme.textStyle.copyWith(
-          fontSize: 20.0,
-          color: defaultLineTheme.textStyle.color.withOpacity(0.7),
-          height: 1.15,
-          fontWeight: FontWeight.w500,
+        heading2: LineTheme(
+          textStyle: defaultLineTheme.textStyle.copyWith(
+            fontSize: 24.0,
+            color: defaultLineTheme.textStyle.color.withOpacity(0.7),
+            height: 1.15,
+            fontWeight: FontWeight.normal,
+          ),
+          padding: EdgeInsets.only(top: 8.0),
         ),
-        padding: EdgeInsets.only(top: 8.0),
-      ),
-      bulletList: BlockTheme(
-        padding: EdgeInsets.symmetric(vertical: 8.0),
-        linePadding: EdgeInsets.symmetric(vertical: 2.0),
-      ),
-      numberList: BlockTheme(
-        padding: EdgeInsets.symmetric(vertical: 8.0),
-        linePadding: EdgeInsets.symmetric(vertical: 2.0),
-      ),
-      quote: BlockTheme(
-        padding: EdgeInsets.symmetric(vertical: 8.0),
-        textStyle: TextStyle(
-          color: defaultLineTheme.textStyle.color.withOpacity(0.6),
+        heading3: LineTheme(
+          textStyle: defaultLineTheme.textStyle.copyWith(
+            fontSize: 20.0,
+            color: defaultLineTheme.textStyle.color.withOpacity(0.7),
+            height: 1.15,
+            fontWeight: FontWeight.w500,
+          ),
+          padding: EdgeInsets.only(top: 8.0),
         ),
-        inheritLineTextStyle: true,
-      ),
-      code: BlockTheme(
-        padding: EdgeInsets.symmetric(vertical: 8.0),
-        textStyle: TextStyle(
-          fontFamily: monospaceFontFamily,
-          fontSize: 14.0,
-          color: defaultLineTheme.textStyle.color.withOpacity(0.8),
-          height: 1.25,
+        bulletList: BlockTheme(
+          padding: EdgeInsets.symmetric(vertical: 8.0),
+          linePadding: EdgeInsets.symmetric(vertical: 2.0),
         ),
-        inheritLineTextStyle: false,
-        linePadding: EdgeInsets.zero,
-      ),
-    );
+        numberList: BlockTheme(
+          padding: EdgeInsets.symmetric(vertical: 8.0),
+          linePadding: EdgeInsets.symmetric(vertical: 2.0),
+        ),
+        quote: BlockTheme(
+          padding: EdgeInsets.symmetric(vertical: 8.0),
+          textStyle: TextStyle(
+            color: defaultLineTheme.textStyle.color.withOpacity(0.6),
+          ),
+          inheritLineTextStyle: true,
+        ),
+        code: BlockTheme(
+          padding: EdgeInsets.symmetric(vertical: 8.0),
+          textStyle: TextStyle(
+            fontFamily: monospaceFontFamily,
+            fontSize: 14.0,
+            color: defaultLineTheme.textStyle.color.withOpacity(0.8),
+            height: 1.25,
+          ),
+          inheritLineTextStyle: false,
+          linePadding: EdgeInsets.zero,
+        ),
+        mjAttribute: TextStyle(color: Colors.teal));
   }
 
   /// Creates a new [AttributeTheme] where each property from this object has
@@ -420,19 +423,20 @@ class AttributeTheme {
     BlockTheme numberList,
     BlockTheme quote,
     BlockTheme code,
+    TextStyle mjAttribute,
   }) {
     return AttributeTheme(
-      bold: bold ?? this.bold,
-      italic: italic ?? this.italic,
-      link: link ?? this.link,
-      heading1: heading1 ?? this.heading1,
-      heading2: heading2 ?? this.heading2,
-      heading3: heading3 ?? this.heading3,
-      bulletList: bulletList ?? this.bulletList,
-      numberList: numberList ?? this.numberList,
-      quote: quote ?? this.quote,
-      code: code ?? this.code,
-    );
+        bold: bold ?? this.bold,
+        italic: italic ?? this.italic,
+        link: link ?? this.link,
+        heading1: heading1 ?? this.heading1,
+        heading2: heading2 ?? this.heading2,
+        heading3: heading3 ?? this.heading3,
+        bulletList: bulletList ?? this.bulletList,
+        numberList: numberList ?? this.numberList,
+        quote: quote ?? this.quote,
+        code: code ?? this.code,
+        mjAttribute: mjAttribute ?? this.mjAttribute);
   }
 
   /// Creates a new [AttributeTheme] where each property from this object has
@@ -450,6 +454,7 @@ class AttributeTheme {
       numberList: numberList?.merge(other.numberList) ?? other.numberList,
       quote: quote?.merge(other.quote) ?? other.quote,
       code: code?.merge(other.code) ?? other.code,
+      mjAttribute: mjAttribute.merge(other.mjAttribute) ?? other.mjAttribute,
     );
   }
 
@@ -466,7 +471,8 @@ class AttributeTheme {
         (otherTheme.bulletList == bulletList) &&
         (otherTheme.numberList == numberList) &&
         (otherTheme.quote == quote) &&
-        (otherTheme.code == code);
+        (otherTheme.code == code) &&
+        otherTheme.mjAttribute == mjAttribute;
   }
 
   @override
@@ -482,6 +488,7 @@ class AttributeTheme {
       numberList,
       quote,
       code,
+      mjAttribute,
     ]);
   }
 }
