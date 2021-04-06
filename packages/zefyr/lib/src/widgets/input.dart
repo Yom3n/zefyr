@@ -154,7 +154,6 @@ class InputConnectionController implements TextInputClient {
         library: 'Zefyr',
         context: ErrorSummary('while updating editing value'),
       ));
-      rethrow;
     }
   }
 
