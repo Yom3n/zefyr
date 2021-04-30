@@ -46,8 +46,7 @@ class InputConnectionController implements TextInputClient {
           keyboardAppearance: keyboardAppearance,
           textCapitalization: TextCapitalization.sentences,
         ),
-      )
-        ..setEditingState(value);
+      )..setEditingState(value);
       _sentRemoteValues.add(value);
     }
     _textInputConnection.show();
@@ -79,11 +78,13 @@ class InputConnectionController implements TextInputClient {
     if (value.text == null || value.text.isEmpty) {
       return;
     }
+
     final actualValue = value.copyWith(
       composing: _lastKnownRemoteTextEditingValue.composing,
     );
 
-    if (actualValue == _lastKnownRemoteTextEditingValue) return;
+    if (actualValue == _lastKnownRemoteTextEditingValue ||
+        actualValue.composing == null) return;
 
     bool shouldRemember = value.text != _lastKnownRemoteTextEditingValue.text;
     _lastKnownRemoteTextEditingValue = actualValue;
