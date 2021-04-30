@@ -76,7 +76,7 @@ class InputConnectionController implements TextInputClient {
     // with the last known remote value.
     // It is important to prevent excessive remote updates as it can cause
     // race conditions.
-    if (value.text == null ||| value.text.isEmpty) {
+    if (value.text == null || value.text.isEmpty) {
       return;
     }
     final actualValue = value.copyWith(
