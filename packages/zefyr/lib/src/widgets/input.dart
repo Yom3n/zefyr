@@ -35,7 +35,11 @@ class InputConnectionController implements TextInputClient {
 
   void openConnection(TextEditingValue value, Brightness keyboardAppearance) {
     if (!hasConnection) {
-      _lastKnownRemoteTextEditingValue = value;
+      _lastKnownRemoteTextEditingValue = value ??
+          TextEditingValue(
+              selection: TextSelection(baseOffset: 0, extentOffset: 0),
+              text: '',
+              composing: TextRange(start: 0, end: 0));
       _textInputConnection = TextInput.attach(
         this,
         TextInputConfiguration(
