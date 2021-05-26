@@ -38,10 +38,11 @@ class ZefyrSelectionOverlay extends StatefulWidget {
 class ZefyrSelectionOverlayState extends State<ZefyrSelectionOverlay>
     implements TextSelectionDelegate {
   TextSelectionControls _controls;
+
   TextSelectionControls get controls => _controls;
 
   final ClipboardStatusNotifier _clipboardStatus =
-  kIsWeb ? null : ClipboardStatusNotifier();
+      kIsWeb ? null : ClipboardStatusNotifier();
 
   /// Global position of last TapDown event.
   Offset _lastTapDownPosition;
@@ -54,6 +55,7 @@ class ZefyrSelectionOverlayState extends State<ZefyrSelectionOverlay>
   AnimationController _toolbarController;
 
   ZefyrScope _scope;
+
   ZefyrScope get scope => _scope;
   TextSelection _selection;
   FocusOwner _focusOwner;
@@ -87,6 +89,7 @@ class ZefyrSelectionOverlayState extends State<ZefyrSelectionOverlay>
   }
 
   bool get isToolbarVisible => _toolbar != null;
+
   bool get isToolbarHidden => _toolbar == null;
 
   @override
@@ -109,7 +112,7 @@ class ZefyrSelectionOverlayState extends State<ZefyrSelectionOverlay>
   }
 
   @override
-  void hideToolbar() {
+  void hideToolbar([bool hideHandles = true]) {
     _didCaretTap = false; // reset double tap.
     _toolbar?.remove();
     _toolbar = null;
@@ -317,6 +320,12 @@ class ZefyrSelectionOverlayState extends State<ZefyrSelectionOverlay>
 
   @override
   bool get selectAllEnabled => _scope.mode.canSelect;
+
+  @override
+  void userUpdateTextEditingValue(
+      TextEditingValue value, SelectionChangedCause cause) {
+    // TODO: implement userUpdateTextEditingValue
+  }
 }
 
 enum _SelectionHandlePosition { base, extent }
@@ -417,8 +426,8 @@ class _SelectionHandleDriverState extends State<SelectionHandleDriver>
             TextSelectionHandleType.right);
         break;
       case _SelectionHandlePosition.extent:
-      // [endpoints] will only contain 1 point for collapsed selections, in
-      // which case we shouldn't be building the [end] handle.
+        // [endpoints] will only contain 1 point for collapsed selections, in
+        // which case we shouldn't be building the [end] handle.
         assert(endpoints.length == 2);
         point = endpoints[1].point;
         type = _chooseType(endpoints[1], TextSelectionHandleType.right,
@@ -433,7 +442,7 @@ class _SelectionHandleDriverState extends State<SelectionHandleDriver>
     );
 
     final Offset handleAnchor =
-    widget.selectionOverlay.controls.getHandleAnchor(
+        widget.selectionOverlay.controls.getHandleAnchor(
       type,
       block.preferredLineHeight,
     );
@@ -496,10 +505,10 @@ class _SelectionHandleDriverState extends State<SelectionHandleDriver>
   //
 
   TextSelectionHandleType _chooseType(
-      TextSelectionPoint endpoint,
-      TextSelectionHandleType ltrType,
-      TextSelectionHandleType rtlType,
-      ) {
+    TextSelectionPoint endpoint,
+    TextSelectionHandleType ltrType,
+    TextSelectionHandleType rtlType,
+  ) {
     if (selection.isCollapsed) return TextSelectionHandleType.collapsed;
 
     assert(endpoint.direction != null);
@@ -567,7 +576,9 @@ class _SelectionToolbar extends StatefulWidget {
 
 class _SelectionToolbarState extends State<_SelectionToolbar> {
   TextSelectionControls get controls => widget.selectionOverlay.controls;
+
   ZefyrScope get scope => widget.selectionOverlay.scope;
+
   TextSelection get selection =>
       widget.selectionOverlay.textEditingValue.selection;
 
